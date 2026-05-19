@@ -6,22 +6,29 @@
 # SHA256 hashed passwords
 
 
-
+import json 
 import os
 import hashlib
 from datetime import datetime
 from getpass import getpass
 
 
+USERS_FILE =os.path.join(os.path.dirname(__file__), "users.json")
 LOCKED_FILE = os.path.join(os.path.dirname(__file__), "locked_accounts.txt")
 AUDIT_FILE = os.path.join(os.path.dirname(__file__), "audit_log.txt")
 
 
-users = {
-        "richard": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae",
-        "alice": "1772d0119cc344f719853b2c032c2921398636766efd3ed2ffbad1c798e2bd97",
-        "bob": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae"
-        }
+
+def load_users():
+    try:
+        with open(USERS_FILE, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("users.json not found.")
+        return {}   
+def save_users(users):
+        with open(USERS_FILE, "w") as f:
+             json.dump(users, f)
 
 def log_action(username, action):
     now = datetime.now()
@@ -39,7 +46,9 @@ def is_locked(username):
 def lock_account(username):
     with open(LOCKED_FILE, "a") as f:
         f.write(username + "\n")                    
-            
+
+users = load_users()            
+
 attempts = 0
 
 username = input("Enter username:")
