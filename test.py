@@ -3,41 +3,35 @@
 # audit log with timestamps
 # persistent lockout accounts file
 # reading and checking locked accounts
-# SHA256 hashed passwords
 
 
-
-import os
-import hashlib
 from datetime import datetime
-from getpass import getpass
 
-
-LOCKED_FILE = os.path.join(os.path.dirname(__file__), "locked_accounts.txt")
-AUDIT_FILE = os.path.join(os.path.dirname(__file__), "audit_log.txt")
+LOCKED_FILE = "/home/jerram/locked_accounts.txt"
+AUDIT_FILE = "/home/jerram/audit_log.txt"
 
 
 users = {
-        "richard": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae",
-        "alice": "1772d0119cc344f719853b2c032c2921398636766efd3ed2ffbad1c798e2bd97",
-        "bob": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae"
+        "richard": "test123",
+        "alice": "test234",
+        "bob": "test123"
         }
 
 def log_action(username, action):
     now = datetime.now()
-    with open(AUDIT_FILE, "a") as f:
+    with open("AUDIT_FILE", "a") as f:
         f.write(f"{now} | {username} | {action}\n")
         
 def is_locked(username):
     try:
-        with open(LOCKED_FILE, "r") as f:
+        with open("LOCKED_FILE", "r") as f:
             locked = f.read().splitlines()
         return username in locked
     except FileNotFoundError:
         return False
             
 def lock_account(username):
-    with open(LOCKED_FILE, "a") as f:
+    with open("LOCKED_FILE", "a") as f:
         f.write(username + "\n")                    
             
 attempts = 0
@@ -49,11 +43,10 @@ if is_locked(username):
     log_action(username, "Attempted login on locked account")
 else:
     while attempts <3:
-        password = getpass("Enter password:")
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
-
+        password = input("Enter password:")
+        
         if username in users:
-           if users[username] == hashed_password:
+           if users[username] == password:
                print("Access granted. Welcome" + username)
                log_action(username, "Successful login")
                break

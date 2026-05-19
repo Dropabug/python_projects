@@ -1,0 +1,17 @@
+2026-05-16 19:44:24.730183 | richard | Successful login
+2026-05-16 19:44:35.526331 | bob | Failed login attempt
+2026-05-16 19:44:39.244086 | bob | Failed login attempt
+2026-05-16 19:44:40.318132 | bob | Failed login attempt
+2026-05-16 19:44:40.319933 | bob | account permanently locked
+2026-05-16 19:44:51.546027 | tom | unkown username attemped
+2026-05-16 19:45:05.509579 | tom | unkown username attemped
+2026-05-16 19:45:07.915110 | tom | unkown username attemped
+2026-05-16 19:45:07.916618 | tom | account permanently locked
+2026-05-16 19:46:12.545525 | tom | Attempted login on locked account
+2026-05-16 19:46:21.444909 | bob | Attempted login on locked account
+2026-05-16 19:47:11.667094 | tom | Attempted login on locked account
+2026-05-18 16:47:06.577659 | bob | Attempted login on locked account
+2026-05-18 16:47:38.464839 | alice | Successful login
+2026-05-18 17:19:38.562468 | alice | Failed login attempt
+2026-05-18 17:19:57.975555 | alice | Failed login attempt
+2026-05-18 17:51:06.031250 | alice | Successful login
