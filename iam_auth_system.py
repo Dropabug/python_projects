@@ -65,7 +65,42 @@ else:
            if users[username] == hashed_password:
                print("Access granted. Welcome" + username)
                log_action(username, "Successful login")
-               break
+               login_time = datetime.now()
+               while True:
+                    print("\n--- MENU ---")
+                    print("1. View account details")
+                    print("2. Change password")
+                    print("3. View session history")
+                    print("4. Logout")
+
+                    choice = input("\nEnter choice: ")
+
+                    if choice ==  "1":
+                        print("Password change coming soon.")
+
+                    elif choice == "2":
+                        print("Password change coming soon.")
+
+                    elif choice == "3":
+                        print("Session histroy coming soon.")
+
+                    elif choice == "4":
+                        logout_time = datetime.now()
+                        duration = logout_time - login_time
+                        log_action(username, "logged out. Session duration: " + str(duration))
+                        print("Goodbye " + username + ". Session duration: " + str(duration))
+                        break
+
+                    else:
+                        print("Invalid choise.")
+
+
+
+
+
+
+
+
            else:
                print("Wrong password.")
                log_action(username, "Failed login attempt")
